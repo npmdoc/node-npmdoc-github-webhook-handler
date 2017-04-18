@@ -1,9 +1,14 @@
-# api documentation for  [github-webhook-handler (v0.6.0)](https://github.com/rvagg/github-webhook-handler#readme)  [![npm package](https://img.shields.io/npm/v/npmdoc-github-webhook-handler.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-github-webhook-handler) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-github-webhook-handler.svg)](https://travis-ci.org/npmdoc/node-npmdoc-github-webhook-handler)
+# npmdoc-github-webhook-handler
+
+#### api documentation for  [github-webhook-handler (v0.6.0)](https://github.com/rvagg/github-webhook-handler#readme)  [![npm package](https://img.shields.io/npm/v/npmdoc-github-webhook-handler.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-github-webhook-handler) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-github-webhook-handler.svg)](https://travis-ci.org/npmdoc/node-npmdoc-github-webhook-handler)
+
 #### Web handler / middleware for processing GitHub Webhooks
 
-[![NPM](https://nodei.co/npm/github-webhook-handler.png?downloads=true)](https://www.npmjs.com/package/github-webhook-handler)
+[![NPM](https://nodei.co/npm/github-webhook-handler.png?downloads=true&downloadRank=true&stars=true)](https://www.npmjs.com/package/github-webhook-handler)
 
-[![apidoc](https://npmdoc.github.io/node-npmdoc-github-webhook-handler/build/screenCapture.buildNpmdoc.browser._2Fhome_2Ftravis_2Fbuild_2Fnpmdoc_2Fnode-npmdoc-github-webhook-handler_2Ftmp_2Fbuild_2Fapidoc.html.png)](https://npmdoc.github.io/node-npmdoc-github-webhook-handler/build/apidoc.html)
+- [https://npmdoc.github.io/node-npmdoc-github-webhook-handler/build/apidoc.html](https://npmdoc.github.io/node-npmdoc-github-webhook-handler/build/apidoc.html)
+
+[![apidoc](https://npmdoc.github.io/node-npmdoc-github-webhook-handler/build/screenCapture.buildCi.browser.%252Ftmp%252Fbuild%252Fapidoc.html.png)](https://npmdoc.github.io/node-npmdoc-github-webhook-handler/build/apidoc.html)
 
 ![npmPackageListing](https://npmdoc.github.io/node-npmdoc-github-webhook-handler/build/screenCapture.npmPackageListing.svg)
 
@@ -18,7 +23,6 @@
 {
     "author": {
         "name": "Rod Vagg",
-        "email": "r@va.gg",
         "url": "http://r.va.gg"
     },
     "bugs": {
@@ -49,17 +53,14 @@
     "main": "github-webhook-handler.js",
     "maintainers": [
         {
-            "name": "rvagg",
-            "email": "rod@vagg.org"
+            "name": "rvagg"
         },
         {
-            "name": "tmpvar",
-            "email": "tmpvar@gmail.com"
+            "name": "tmpvar"
         }
     ],
     "name": "github-webhook-handler",
     "optionalDependencies": {},
-    "readme": "ERROR: No README data found!",
     "repository": {
         "type": "git",
         "url": "git+https://github.com/rvagg/github-webhook-handler.git"
@@ -70,16 +71,6 @@
     "version": "0.6.0"
 }
 ```
-
-
-
-# <a name="apidoc.tableOfContents"></a>[table of contents](#apidoc.tableOfContents)
-
-#### [module github-webhook-handler](#apidoc.module.github-webhook-handler)
-
-
-
-# <a name="apidoc.module.github-webhook-handler"></a>[module github-webhook-handler](#apidoc.module.github-webhook-handler)
 
 
 
