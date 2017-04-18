@@ -1,4 +1,4 @@
-<div class="apidocDiv">
+<html><head></head><body><div class="apidocDiv">
 <style>
 /*csslint
 */
@@ -47,17 +47,10 @@
 }
 </style>
 <h1>api documentation for
-    <a
-
-        href="https://github.com/rvagg/github-webhook-handler#readme"
-
-    >github-webhook-handler (v0.6.0)</a>
+    <a href="https://github.com/rvagg/github-webhook-handler#readme">github-webhook-handler (v0.6.0)</a>
 </h1>
 <h4>Web handler / middleware for processing GitHub Webhooks</h4>
-<div class="apidocSectionDiv"><a
-    href="#apidoc.tableOfContents"
-    id="apidoc.tableOfContents"
-><h1>table of contents</h1></a><ol>
+<div class="apidocSectionDiv"><a href="#apidoc.tableOfContents" id="apidoc.tableOfContents"><h1>table of contents</h1></a><ol>
 
     <li class="apidocModuleLi"><a href="#apidoc.module.github-webhook-handler">module github-webhook-handler</a><ol>
 
@@ -86,21 +79,21 @@
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">function create(options) {
-  if (typeof options != &#x27;object&#x27;)
-    throw new TypeError(&#x27;must provide an options object&#x27;)
+  if (typeof options != 'object')
+    throw new TypeError('must provide an options object')
 
-  if (typeof options.path != &#x27;string&#x27;)
-    throw new TypeError(&#x27;must provide a \&#x27;path\&#x27; option&#x27;)
+  if (typeof options.path != 'string')
+    throw new TypeError('must provide a \'path\' option')
 
-  if (typeof options.secret != &#x27;string&#x27;)
-    throw new TypeError(&#x27;must provide a \&#x27;secret\&#x27; option&#x27;)
+  if (typeof options.secret != 'string')
+    throw new TypeError('must provide a \'secret\' option')
 
   var events
 
-  if (typeof options.events == &#x27;string&#x27; &#x26;&#x26; options.events != &#x27;*&#x27;)
+  if (typeof options.events == 'string' &amp;&amp; options.events != '*')
     events = [ options.events ]
 
-  else if (Array.isArray(options.events) &#x26;&#x26; options.events.indexOf(&#x27;*&#x27;) == -1)
+  else if (Array.isArray(options.events) &amp;&amp; options.events.indexOf('*') == -1)
     events = options.events
 
   // make it an EventEmitter, sort of
@@ -111,34 +104,34 @@
 
 
   function handler (req, res, callback) {
-    if (req.url.split(&#x27;?&#x27;).shift() !== options.path)
+    if (req.url.split('?').shift() !== options.path)
       return callback()
 
     function hasError (msg) {
-      res.writeHead(400, { &#x27;content-type&#x27;: &#x27;application/json&#x27; })
+      res.writeHead(400, { 'content-type': 'application/json' })
       res.end(JSON.stringify({ error: msg }))
 
       var err = new Error(msg)
 
-      handler.emit(&#x27;error&#x27;, err, req)
+      handler.emit('error', err, req)
       callback(err)
     }
 
-    var sig   = req.headers[&#x27;x-hub-signature&#x27;]
-      , event = req.headers[&#x27;x-github-event&#x27;]
-      , id    = req.headers[&#x27;x-github-delivery&#x27;]
+    var sig   = req.headers['x-hub-signature']
+      , event = req.headers['x-github-event']
+      , id    = req.headers['x-github-delivery']
 
     if (!sig)
-      return hasError(&#x27;No X-Hub-Signature found on request&#x27;)
+      return hasError('No X-Hub-Signature found on request')
 
     if (!event)
-      return hasError(&#x27;No X-Github-Event found on request&#x27;)
+      return hasError('No X-Github-Event found on request')
 
     if (!id)
-      return hasError(&#x27;No X-Github-Delivery found on request&#x27;)
+      return hasError('No X-Github-Delivery found on request')
 
-    if (events &#x26;&#x26; events.indexOf(event) == -1)
-      return hasError(&#x27;X-Github-Event is not acceptable&#x27;)
+    if (events &amp;&amp; events.indexOf(event) == -1)
+      return hasError('X-Github-Event is not acceptable')
 
     req.pipe(bl(function (err, data) {
       if (err) {
@@ -149,7 +142,7 @@
       var computedSig = new Buffer(signBlob(options.secret, data))
 
       if (!bufferEq(new Buffer(sig), computedSig))
-        return hasError(&#x27;X-Hub-Signature does not match blob signature&#x27;)
+        return hasError('X-Hub-Signature does not match blob signature')
 
       try {
         obj = JSON.parse(data.toString())
@@ -157,20 +150,20 @@
         return hasError(e)
       }
 
-      res.writeHead(200, { &#x27;content-type&#x27;: &#x27;application/json&#x27; })
-      res.end(&#x27;{&#x22;ok&#x22;:true}&#x27;)
+      res.writeHead(200, { 'content-type': 'application/json' })
+      res.end('{"ok":true}')
 
       var emitData = {
           event   : event
         , id      : id
         , payload : obj
         , protocol: req.protocol
-        , host    : req.headers[&#x27;host&#x27;]
+        , host    : req.headers['host']
         , url     : req.url
       }
 
       handler.emit(event, emitData)
-      handler.emit(&#x27;*&#x27;, emitData)
+      handler.emit('*', emitData)
     }))
   }
 }</pre></li>
@@ -186,3 +179,4 @@
     ]
 </div>
 </div>
+</body></html>

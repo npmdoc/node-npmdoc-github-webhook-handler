@@ -61,12 +61,122 @@
 
     <li class="apidocModuleLi"><a href="#apidoc.module.github-webhook-handler">module github-webhook-handler</a><ol>
 
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.github-webhook-handler.github-webhook-handler">
+            function <span class="apidocSignatureSpan"></span>github-webhook-handler
+            <span class="apidocSignatureSpan">(options)</span>
+            </a>
+
+        </li>
+
     </ol></li>
 
 </ol></div>
 
 <div class="apidocSectionDiv">
 <h1><a href="#apidoc.module.github-webhook-handler" id="apidoc.module.github-webhook-handler">module github-webhook-handler</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.github-webhook-handler.github-webhook-handler" id="apidoc.element.github-webhook-handler.github-webhook-handler">
+        function <span class="apidocSignatureSpan"></span>github-webhook-handler
+        <span class="apidocSignatureSpan">(options)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function create(options) {
+  if (typeof options != &#x27;object&#x27;)
+    throw new TypeError(&#x27;must provide an options object&#x27;)
+
+  if (typeof options.path != &#x27;string&#x27;)
+    throw new TypeError(&#x27;must provide a \&#x27;path\&#x27; option&#x27;)
+
+  if (typeof options.secret != &#x27;string&#x27;)
+    throw new TypeError(&#x27;must provide a \&#x27;secret\&#x27; option&#x27;)
+
+  var events
+
+  if (typeof options.events == &#x27;string&#x27; &#x26;&#x26; options.events != &#x27;*&#x27;)
+    events = [ options.events ]
+
+  else if (Array.isArray(options.events) &#x26;&#x26; options.events.indexOf(&#x27;*&#x27;) == -1)
+    events = options.events
+
+  // make it an EventEmitter, sort of
+  handler.__proto__ = EventEmitter.prototype
+  EventEmitter.call(handler)
+
+  return handler
+
+
+  function handler (req, res, callback) {
+    if (req.url.split(&#x27;?&#x27;).shift() !== options.path)
+      return callback()
+
+    function hasError (msg) {
+      res.writeHead(400, { &#x27;content-type&#x27;: &#x27;application/json&#x27; })
+      res.end(JSON.stringify({ error: msg }))
+
+      var err = new Error(msg)
+
+      handler.emit(&#x27;error&#x27;, err, req)
+      callback(err)
+    }
+
+    var sig   = req.headers[&#x27;x-hub-signature&#x27;]
+      , event = req.headers[&#x27;x-github-event&#x27;]
+      , id    = req.headers[&#x27;x-github-delivery&#x27;]
+
+    if (!sig)
+      return hasError(&#x27;No X-Hub-Signature found on request&#x27;)
+
+    if (!event)
+      return hasError(&#x27;No X-Github-Event found on request&#x27;)
+
+    if (!id)
+      return hasError(&#x27;No X-Github-Delivery found on request&#x27;)
+
+    if (events &#x26;&#x26; events.indexOf(event) == -1)
+      return hasError(&#x27;X-Github-Event is not acceptable&#x27;)
+
+    req.pipe(bl(function (err, data) {
+      if (err) {
+        return hasError(err.message)
+      }
+
+      var obj
+      var computedSig = new Buffer(signBlob(options.secret, data))
+
+      if (!bufferEq(new Buffer(sig), computedSig))
+        return hasError(&#x27;X-Hub-Signature does not match blob signature&#x27;)
+
+      try {
+        obj = JSON.parse(data.toString())
+      } catch (e) {
+        return hasError(e)
+      }
+
+      res.writeHead(200, { &#x27;content-type&#x27;: &#x27;application/json&#x27; })
+      res.end(&#x27;{&#x22;ok&#x22;:true}&#x27;)
+
+      var emitData = {
+          event   : event
+        , id      : id
+        , payload : obj
+        , protocol: req.protocol
+        , host    : req.headers[&#x27;host&#x27;]
+        , url     : req.url
+      }
+
+      handler.emit(event, emitData)
+      handler.emit(&#x27;*&#x27;, emitData)
+    }))
+  }
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
 
 </div>
 
