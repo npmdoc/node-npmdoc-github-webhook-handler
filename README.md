@@ -1,6 +1,6 @@
 # npmdoc-github-webhook-handler
 
-#### api documentation for  [github-webhook-handler (v0.6.0)](https://github.com/rvagg/github-webhook-handler#readme)  [![npm package](https://img.shields.io/npm/v/npmdoc-github-webhook-handler.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-github-webhook-handler) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-github-webhook-handler.svg)](https://travis-ci.org/npmdoc/node-npmdoc-github-webhook-handler)
+#### basic api documentation for  [github-webhook-handler (v0.6.0)](https://github.com/rvagg/github-webhook-handler#readme)  [![npm package](https://img.shields.io/npm/v/npmdoc-github-webhook-handler.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-github-webhook-handler) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-github-webhook-handler.svg)](https://travis-ci.org/npmdoc/node-npmdoc-github-webhook-handler)
 
 #### Web handler / middleware for processing GitHub Webhooks
 
@@ -68,7 +68,8 @@
     "scripts": {
         "test": "node test.js"
     },
-    "version": "0.6.0"
+    "version": "0.6.0",
+    "bin": {}
 }
 ```
 
